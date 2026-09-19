@@ -29,41 +29,42 @@
       overflow: hidden;
     }
 
+    /* Container utama mengikuti 100% lebar ruang tempatnya diletakkan */
     .container {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      width: min(90%, 320px);
-      padding: 30px 0;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      container-type: inline-size; /* Memicu container query untuk skala responsif */
     }
 
-    /* Judul dengan glow tipis */
+    /* Judul rata kiri mengikuti skala container */
     .title {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-size: clamp(1rem, 8cqi, 2.2rem);
       font-weight: 800;
       letter-spacing: 3px;
       line-height: 1.2;
-      margin-bottom: 25px;
+      margin-bottom: 5cqi;
       color: #ffffff;
-      text-shadow: 0 0 6px rgba(255, 166, 0, 0.35); /* Glow diperkecil */
+      text-shadow: 0 0 6px rgba(255, 166, 0, 0.35);
       align-self: flex-start;
-      padding-left: 0;
-      margin-left: 0;
     }
 
     .circle-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100%;
+      width: 100%; /* Membuat komponen lingkaran menggunakan penuh lebar ruang */
     }
 
     .circle-wrapper {
       position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
+      width: 100%; /* Fleksibel membesar/mengecil mengikuti ruang */
+      aspect-ratio: 1 / 1; /* Menjaga rasio lingkaran tetap simetris */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -83,14 +84,13 @@
       stroke-width: 6;
     }
 
-    /* Progress bar melingkar dengan glow yang diperkecil (9px -> 4px) */
     .circle-progress {
       fill: none;
       stroke: #ffa600;
       stroke-width: 6;
       stroke-linecap: round;
       transition: stroke-dashoffset 0.5s linear;
-      filter: drop-shadow(0 0 4px rgba(255, 166, 0, 0.75)); /* Radius glow diperkecil */
+      filter: drop-shadow(0 0 4px rgba(255, 166, 0, 0.75));
     }
 
     .number-container {
@@ -101,47 +101,47 @@
       justify-content: center;
     }
 
-    /* Angka persentase dengan glow lebih tipis */
+    /* Ukuran teks di dalam lingkaran beradaptasi menggunakan unit cqi */
     .number {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.8rem, 4.8vw, 2.8rem);
+      font-size: clamp(1.2rem, 14cqi, 3.5rem);
       font-weight: 800;
       color: #ffffff;
-      text-shadow: 0 0 5px rgba(255, 166, 0, 0.4); /* Glow diperkecil */
+      text-shadow: 0 0 5px rgba(255, 166, 0, 0.4);
       line-height: 1;
     }
 
     .sub-number {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.6rem, 1.4vw, 0.75rem);
+      font-size: clamp(0.5rem, 3.8cqi, 1rem);
       font-weight: 600;
       color: #ffffff;
       letter-spacing: 1.5px;
-      margin-top: 8px;
+      margin-top: 2cqi;
       text-transform: uppercase;
-      text-shadow: 0 0 4px rgba(255, 166, 0, 0.3); /* Glow diperkecil */
+      text-shadow: 0 0 4px rgba(255, 166, 0, 0.3);
     }
 
     .label {
-      margin-top: 18px;
+      margin-top: 4cqi;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 2cqi;
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+      font-size: clamp(0.6rem, 4.2cqi, 1.1rem);
       font-weight: 600;
       color: #ffffff;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      text-shadow: 0 0 4px rgba(255, 166, 0, 0.3); /* Glow diperkecil */
+      text-shadow: 0 0 4px rgba(255, 166, 0, 0.3);
     }
 
     .label-box {
-      width: 10px;
-      height: 10px;
+      width: clamp(6px, 2.5cqi, 12px);
+      height: clamp(6px, 2.5cqi, 12px);
       background-color: #ffa600;
       border-radius: 2px;
-      box-shadow: 0 0 4px rgba(255, 166, 0, 0.6); /* Glow kotak diperkecil */
+      box-shadow: 0 0 4px rgba(255, 166, 0, 0.6);
     }
   </style>
 </head>
