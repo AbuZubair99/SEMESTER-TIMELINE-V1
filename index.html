@@ -29,50 +29,47 @@
       overflow: hidden;
     }
 
-    /* Container utama menggunakan Grid agar pembagian ruang vertikal lebih stabil */
+    /* Container utama: Mengelompokkan semua elemen rapat di tengah */
     .container {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      justify-items: center;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       width: 100%;
-      height: 100vh;
-      max-height: 100vh;
-      padding: 12px;
-      gap: 8px;
-      overflow: hidden;
-      container-type: size; /* Memicu container query berbasis tinggi & lebar */
+      height: 100%;
+      max-width: 320px; /* Batas lebar komponen agar tidak terlalu melar */
+      padding: 16px;
+      gap: 12px; /* Jarak antar elemen tetap rapat */
+      container-type: inline-size;
     }
 
-    /* Judul rata kiri */
+    /* Judul tetap di kiri atas komponen */
     .title {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.75rem, 5cqw, 1.5rem);
+      font-size: clamp(0.9rem, 7cqi, 1.8rem);
       font-weight: 800;
       letter-spacing: 2px;
-      line-height: 1.1;
+      line-height: 1.2;
       color: #ffffff;
       text-shadow: 0 0 6px rgba(255, 166, 0, 0.35);
-      justify-self: start;
+      align-self: flex-start;
       width: 100%;
     }
 
     .circle-item {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       width: 100%;
-      height: 100%;
-      min-height: 0; /* Mengunci agar tidak membesar melebihi area grid */
     }
 
-    /* Kunci Perbaikan: Lingkaran dikunci berbasis nilai terkecil antara lebar (cqw) dan tinggi (cqh) */
+    /* Ukuran lingkaran responsif mengikuti lebar container tanpa overflow */
     .circle-wrapper {
       position: relative;
-      width: min(65cqw, 55cqh);
-      height: min(65cqw, 55cqh);
+      width: 100%;
       max-width: 240px;
-      max-height: 240px;
+      aspect-ratio: 1 / 1;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -110,10 +107,9 @@
       width: 80%;
     }
 
-    /* Ukuran teks dinamis mengikuti skala container */
     .number {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.85rem, 12cqw, 2.2rem);
+      font-size: clamp(1rem, 12cqi, 2.8rem);
       font-weight: 800;
       color: #ffffff;
       text-shadow: 0 0 5px rgba(255, 166, 0, 0.4);
@@ -122,22 +118,23 @@
 
     .sub-number {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.4rem, 3cqw, 0.7rem);
+      font-size: clamp(0.45rem, 3.5cqi, 0.8rem);
       font-weight: 600;
       color: #ffffff;
       letter-spacing: 1px;
-      margin-top: 4px;
+      margin-top: 6px;
       text-transform: uppercase;
       text-shadow: 0 0 4px rgba(255, 166, 0, 0.3);
       white-space: nowrap;
     }
 
     .label {
+      margin-top: 8px;
       display: flex;
       align-items: center;
       gap: 6px;
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.5rem, 3.5cqw, 0.85rem);
+      font-size: clamp(0.55rem, 4cqi, 0.95rem);
       font-weight: 600;
       color: #ffffff;
       letter-spacing: 2px;
@@ -146,8 +143,8 @@
     }
 
     .label-box {
-      width: clamp(5px, 2cqw, 8px);
-      height: clamp(5px, 2cqw, 8px);
+      width: clamp(6px, 2.5cqi, 10px);
+      height: clamp(6px, 2.5cqi, 10px);
       background-color: #ffa600;
       border-radius: 2px;
       box-shadow: 0 0 4px rgba(255, 166, 0, 0.6);
@@ -171,11 +168,11 @@
           <span class="sub-number">Total Progress</span>
         </div>
       </div>
-    </div>
-
-    <div class="label">
-      <span class="label-box"></span>
-      <span>SEMESTER 1</span>
+      
+      <div class="label">
+        <span class="label-box"></span>
+        <span>SEMESTER 1</span>
+      </div>
     </div>
   </div>
 
