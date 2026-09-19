@@ -23,13 +23,23 @@
       padding: 20px;
     }
 
+    /* Container utama transparan */
     .container {
-      background-color: #1a1a1a;
-      border-radius: 16px;
-      padding: 40px;
+      background: transparent;
+      padding: 10px;
       width: 100%;
-      max-width: 480px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      container-type: inline-size;
+    }
+
+    /* Wrapper khusus agar Judul dan Lingkaran memiliki batas rata kiri yang presisi */
+    .content-wrapper {
+      width: 100%;
+      max-width: 320px; /* Samakan dengan max-width lingkaran */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -37,26 +47,31 @@
 
     .title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
+      font-size: clamp(16px, 5cqi, 24px);
       letter-spacing: 2px;
-      margin-bottom: 35px;
+      margin-bottom: 20px;
       color: #ffffff;
       text-transform: uppercase;
       text-shadow: 0 0 10px rgba(255, 157, 0, 0.3);
-      align-self: flex-start;
+      align-self: flex-start; /* Mengatur judul agar sejajar dengan tepi kiri wrapper */
+      width: 100%;
+      text-align: left;
     }
 
-    /* Progress Circle */
+    /* Circular Progress Bar Responsif */
     .circle-card {
       position: relative;
-      width: 240px;
-      height: 240px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .circle-card svg {
       width: 100%;
       height: 100%;
-      overflow: visible; /* Mencegah glow terpotong batas canvas SVG */
+      overflow: visible;
     }
 
     .circle-card circle {
@@ -64,24 +79,24 @@
       stroke-width: 12;
       stroke-linecap: round;
       transform-origin: center;
-      transform: rotate(-90deg); /* Memutar titik awal ke atas jam 12 */
+      transform: rotate(-90deg);
     }
 
     .bg-circle {
       stroke: #262626;
     }
 
-    /* Lingkaran Bayangan Glow di Belakang */
+    /* Lingkaran Efek Glow */
     .glow-circle {
       stroke: #ff9d00;
       stroke-dasharray: 628.32;
       stroke-dashoffset: 628.32;
-      filter: url(#glowFilter); /* Menggunakan SVG filter untuk pendaran halus */
+      filter: url(#glowFilter);
       opacity: 0.9;
       transition: stroke-dashoffset 1s ease-in-out;
     }
 
-    /* Lingkaran Utam / Solid Progress */
+    /* Lingkaran Solid Utama */
     .progress-circle {
       stroke: #ff9d00;
       stroke-dasharray: 628.32;
@@ -104,15 +119,16 @@
 
     .percentage-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 38px;
+      font-size: clamp(20px, 12cqi, 42px);
       font-weight: 700;
       color: #ffffff;
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      line-height: 1.1;
     }
 
     .sub-text {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 14px;
+      font-size: clamp(10px, 4cqi, 15px);
       font-weight: 700;
       letter-spacing: 1px;
       color: #aaaaaa;
@@ -121,19 +137,19 @@
     }
 
     .indicator-label {
-      margin-top: 25px;
+      margin-top: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
       font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
+      font-size: clamp(11px, 3.5cqi, 14px);
       letter-spacing: 2px;
       color: #cccccc;
     }
 
     .indicator-box {
-      width: 12px;
-      height: 12px;
+      width: clamp(8px, 2.5cqi, 12px);
+      height: clamp(8px, 2.5cqi, 12px);
       background-color: #ff9d00;
       border-radius: 2px;
       box-shadow: 0 0 8px rgba(255, 157, 0, 0.8);
@@ -143,81 +159,73 @@
 <body>
 
   <div class="container">
-    <h2 class="title">Semester Timeline</h2>
+    <!-- Content Wrapper untuk mengunci lebar Judul dan Lingkaran secara sejajar -->
+    <div class="content-wrapper">
+      <h2 class="title">Semester Timeline</h2>
 
-    <!-- Circular Progress Bar -->
-    <div class="circle-card">
-      <svg viewBox="0 0 220 220">
-        <!-- Definisikan Filter Glow SVG -->
-        <defs>
-          <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
-            <!-- Membuat blur khusus pada stroke garis -->
-            <feGaussianBlur stdDeviation="6" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
+      <!-- Circular Progress Bar -->
+      <div class="circle-card">
+        <svg viewBox="0 0 220 220">
+          <defs>
+            <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
 
-        <!-- Background Lingkaran Gelap -->
-        <circle class="bg-circle" cx="110" cy="110" r="100" />
-        
-        <!-- Lingkaran Efek Glow (Di belakang lingkaran utama) -->
-        <circle class="glow-circle" id="glowProgress" cx="110" cy="110" r="100" />
-        
-        <!-- Lingkaran Solid Utama -->
-        <circle class="progress-circle" id="semesterProgress" cx="110" cy="110" r="100" />
-      </svg>
+          <!-- Background Lingkaran Gelap -->
+          <circle class="bg-circle" cx="110" cy="110" r="100" />
+          
+          <!-- Lingkaran Efek Glow -->
+          <circle class="glow-circle" id="glowProgress" cx="110" cy="110" r="100" />
+          
+          <!-- Lingkaran Solid Utama -->
+          <circle class="progress-circle" id="semesterProgress" cx="110" cy="110" r="100" />
+        </svg>
 
-      <div class="circle-content">
-        <span class="percentage-text" id="percentText">0%</span>
-        <span class="sub-text">Total Progress</span>
+        <div class="circle-content">
+          <span class="percentage-text" id="percentText">0%</span>
+          <span class="sub-text">Total Progress</span>
+        </div>
       </div>
-    </div>
 
-    <div class="indicator-label">
-      <span class="indicator-box"></span>
-      <span>SEMESTER 1</span>
+      <div class="indicator-label">
+        <span class="indicator-box"></span>
+        <span>SEMESTER 1</span>
+      </div>
     </div>
   </div>
 
   <script>
-    // Konfigurasi Tanggal (1 Juni 2026 sampai 6 Januari 2027)
     const startDate = new Date('2026-06-01T00:00:00');
     const endDate = new Date('2027-01-06T00:00:00');
 
     function updateProgress() {
       const now = new Date();
 
-      // Hitung Total Durasi dan Waktu Terlewati
       const totalDuration = endDate - startDate;
       const elapsedTime = now - startDate;
       
       let percentage = (elapsedTime / totalDuration) * 100;
       
-      // Batasi persentase antara 0% dan 100%
       if (percentage < 0) percentage = 0;
       if (percentage > 100) percentage = 100;
 
-      // Format Angka Persentase dengan koma (contoh: 50,23%)
       const formattedPercent = percentage.toFixed(2).replace('.', ',');
       document.getElementById('percentText').innerText = `${formattedPercent}%`;
 
-      // Update Keliling Lingkaran SVG (Radius = 100 -> Keliling = 2 * PI * 100 ≈ 628.32)
       const circleRadius = 100;
       const circumference = 2 * Math.PI * circleRadius;
       const strokeDashoffset = circumference - (percentage / 100) * circumference;
       
-      // Terapkan ke garis utama dan garis efek glow
       document.getElementById('semesterProgress').style.strokeDashoffset = strokeDashoffset;
       document.getElementById('glowProgress').style.strokeDashoffset = strokeDashoffset;
     }
 
-    // Jalankan pertama kali saat halaman dimuat
     updateProgress();
-
-    // Perbarui otomatis setiap detik
     setInterval(updateProgress, 1000);
   </script>
 </body>
