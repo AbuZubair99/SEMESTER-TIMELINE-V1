@@ -29,24 +29,31 @@
       overflow: hidden;
     }
 
-    /* Container utama: Mengelompokkan semua elemen rapat di tengah */
+    /* Container luar untuk memosisikan kartu di tengah layar */
     .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+    }
+
+    /* Satu DIV utama yang membungkus Judul, Lingkaran, dan Label */
+    .card-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       width: 100%;
-      height: 100%;
-      max-width: 320px;
-      padding: 16px;
-      gap: 12px;
-      container-type: inline-size;
+      max-width: 260px; /* Ukuran maksimal kartu */
+      gap: 12px; /* Jarak konsisten antar elemen di dalamnya */
+      container-type: inline-size; /* Menjaga teks di dalam kartu tetap proporsional */
     }
 
-    /* Judul tetap di kiri atas komponen */
+    /* Judul rata kiri mengikuti lebar div pembungkus */
     .title {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.9rem, 7cqi, 1.8rem);
+      font-size: clamp(0.85rem, 7cqi, 1.6rem);
       font-weight: 800;
       letter-spacing: 2px;
       line-height: 1.2;
@@ -56,19 +63,10 @@
       width: 100%;
     }
 
-    .circle-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
-
-    /* Ukuran lingkaran responsif mengikuti lebar container tanpa overflow */
+    /* Pembungkus lingkaran */
     .circle-wrapper {
       position: relative;
       width: 100%;
-      max-width: 240px;
       aspect-ratio: 1 / 1;
       display: flex;
       justify-content: center;
@@ -107,7 +105,6 @@
       width: 80%;
     }
 
-    /* Angka diperkecil agar tidak terlalu rapat ke tepi lingkaran */
     .number {
       font-family: 'Orbitron', sans-serif;
       font-size: clamp(0.8rem, 8.5cqi, 1.9rem);
@@ -129,8 +126,8 @@
       white-space: nowrap;
     }
 
+    /* Label teks di bawah lingkaran */
     .label {
-      margin-top: 8px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -156,9 +153,10 @@
 <body>
 
   <div class="container">
-    <h1 class="title">SEMESTER<br>TRACKER</h1>
-    
-    <div class="circle-item">
+    <!-- SATU DIV PEMBUNGKUS UTAMA -->
+    <div class="card-wrapper">
+      <h1 class="title">SEMESTER<br>TRACKER</h1>
+      
       <div class="circle-wrapper">
         <svg class="circle-svg" viewBox="0 0 100 100">
           <circle class="circle-bg" cx="50" cy="50" r="40"></circle>
